@@ -1,0 +1,52 @@
+﻿import rospy
+from clover import srv
+from sensor_msgs.msg import Range
+from std_srvs.srv import Trigger
+
+rospy.init_node('car')
+
+get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
+navigate = rospy.ServiceProxy('navigate', srv.Navigate)
+navigate_global = rospy.ServiceProxy('navigate_global', srv.NavigateGlobal)
+set_position = rospy.ServiceProxy('set_position', srv.SetPosition)
+set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)
+set_attitude = rospy.ServiceProxy('set_attitude', srv.SetAttitude)
+set_rates = rospy.ServiceProxy('set_rates', srv.SetRates)
+rospy.Subscriber('rangefinder/range', Range, range_callback)
+
+def range_callback(msg):
+    # Обработка новых данных с дальномера
+    print('Rangefinder distance:', msg.range)
+
+
+def parse_map(m):
+    lines = m.splitlines()
+     # начало координат (точка отправления)
+    navigate_global() 
+    
+     # координаты места назначения
+    destination = len(lines[-1]) - 1, len(lines) - 1 
+    return lines, origin, destination
+
+def obstacle
+  begin_obst_coord = 0 # начальная координата препятствия
+  end_obst_coord = 0 # конечная координата препятствия
+ 
+  for time in [1,2,3,4]: #как бы счетчик времени
+    current_coordinte = speed * time  # вычисление собственной координаты (и одновременно пройденого пути)
+ 
+    is_obstacle = bool(input ("наткнулся на препятствие?")) # поступление сигнала (как бы от датчика) о наличии препятствия
+    if is_obstacle == 1: # если преграда есть то
+        begin_obst_coord = current_coordinte # записываем свое положение как начало преграды
+        while is_obstacle == 1:
+            end_obst_coord = current_coordinte
+    else: # иначе
+        continue # выходим из цикла и продолжаем
+ 
+print("Координата начала препятствия: ", begin_obst_coord) # выводим на экран требуемые значения
+print("Координата конца препятствия: ", end_obst_coord)
+print ("Длина препятствия: ", end_obst_coord - begin_obst_coord
+
+navigate_global(lat=53.207948, lon=50.159347, z=0, speed=5, frame_id='body')
+navigate_global(lat=53.207909, lon=50.159428, z=0, speed=5, frame_id='body')
+
